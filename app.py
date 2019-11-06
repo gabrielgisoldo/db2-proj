@@ -43,7 +43,8 @@ def ver_paciente(id_paciente):
 @app.route('/add_img_paciente', methods=["POST"])
 def add_img_paciente():
     """."""
-    return controller.inserir_img()
+    r = controller.inserir_img()
+    return redirect(r)
 
 
 port = int(os.environ.get('PORT', "5000"))

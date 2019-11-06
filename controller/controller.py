@@ -40,8 +40,4 @@ class Controller(object):
                 id_paciente=id_paciente, nome_imagem=item.filename,
                 imagem=item)
 
-        return """
-        <script>
-            window.location='/ver_paciente/%s';
-        </script>
-        """ % (id_paciente)
+        return '/ver_paciente/%s' % (id_paciente)
