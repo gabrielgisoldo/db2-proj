@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+        <title>Index</title>
+    </head>
+    <body>
+        <center>
+            <a href="adicionar_paciente">Cadastrar paciente</a>
+            <br><br>
+            <ul>
+                {% for item in pacientes %}
+                    <li style="list-style-type: none;"><a href="ver_paciente/{{ item['_id'] }}">{{ item['nome'] }} - {{ item['cpf'] }}</a></li>
+                {% endfor %}
+            </ul>
+        </center>
+    </body>
+</html>
