@@ -4,7 +4,7 @@ from flask import request
 
 
 class Controller(object):
-    """docstring for Controller"""
+    """docstring for Controller."""
 
     def __init__(self):
         """."""
@@ -29,3 +29,19 @@ class Controller(object):
     def buscar_paciente(self, id_paciente):
         """."""
         return self.model.buscar_paciente(id_paciente)
+
+    def inserir_img(self):
+        """."""
+        id_paciente = request.form.get('id_paciente')
+        imagens = request.files.getlist('imagens')
+
+        for item in imagens:
+            self.model.inserir_img_paciente(
+                id_paciente=id_paciente, nome_imagem=item.filename,
+                imagem=item)
+
+        return """
+        <script>
+            window.location='/ver_paciente/%s';
+        </script>
+        """ % (id_paciente)

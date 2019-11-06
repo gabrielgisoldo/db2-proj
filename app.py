@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Flask, render_template, request, jsonify, url_for, redirect
+from flask import Flask, render_template, jsonify, url_for, redirect
 import os
 from controller.controller import Controller
 
@@ -38,6 +38,12 @@ def ver_paciente(id_paciente):
     """."""
     paciente = controller.buscar_paciente(id_paciente)
     return render_template('paciente.html', paciente=paciente)
+
+
+@app.route('/add_img_paciente', methods=["POST"])
+def add_img_paciente():
+    """."""
+    return controller.inserir_img()
 
 
 port = int(os.environ.get('PORT', "5000"))

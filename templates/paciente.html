@@ -9,13 +9,22 @@
         <center>
             <br><br>
             Paciente: {{ paciente['nome'] }}<br>
-            CPF: {{ paciente['cpf'] }}<br>
+            CPF: {{ paciente['cpf'] }}
+            <br><br>
+            <form method="POST" enctype='multipart/form-data' action="/add_img_paciente">
+                <input type="hidden" name="id_paciente" value="{{ paciente['_id'] }}">
+                <p>imagens: <input type="file" name="imagens" multiple></p>
+                <input type="submit" value="Enviar >>">
+            </form>
             <br><br>
             <p>Imagens:</p>
             <ul>
                 {% for item in paciente['imagens'] %}
                     <li style="list-style-type: none;">
-                        <img width="60%" src="data:image/*;base64, {{ item['b64'] }}" alt="{{ item['nome_imagem'] }}"/>
+                        <figure>
+                            <img width="60%" src="data:image/*;base64, {{ item['b64'] }}" alt="{{ item['nome_imagem'] }}"/>
+                            <figcaption>{{ item['nome_imagem'] }}</figcaption>
+                        </figure>
                     </li>
                 {% endfor %}
             </ul>
