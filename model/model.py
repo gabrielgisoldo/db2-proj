@@ -20,6 +20,8 @@ class Model(object):
 
     def inserir_img_paciente(self, id_paciente, nome_imagem, imagem):
         """."""
+        if not nome_imagem or not imagem:
+            return None
         id_paciente = ObjectId(id_paciente)
         t = {'id_paciente': id_paciente,
              'nome_imagem': nome_imagem, 'binario': imagem.read()}

@@ -1,34 +1,43 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-        <title>Paciente {{ paciente['_id']}}</title>
-    </head>
-    <body>
-        <center>
-            <a href="/"><< Voltar</a>
-            <br><br>
-            Paciente: {{ paciente['nome'] }}<br>
-            CPF: {{ paciente['cpf'] }}
-            <br><br>
-            <form method="POST" enctype='multipart/form-data' action="/add_img_paciente">
-                <input type="hidden" name="id_paciente" value="{{ paciente['_id'] }}">
-                <p>imagens: <input type="file" name="imagens" multiple></p>
-                <input type="submit" value="Enviar >>">
-            </form>
-            <br><br>
-            <p>Imagens:</p>
-            <ul>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Paciente {{ paciente['cpf']}}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='lightbox.min.css') }}">
+    <style type="text/css">.photo-gallery{color:#313437;background-color:#fff}.photo-gallery p{color:#7d8285}.photo-gallery h2{font-weight:700;margin-bottom:40px;padding-top:40px;color:inherit}@media (max-width:767px){.photo-gallery h2{margin-bottom:25px;padding-top:25px;font-size:24px}}.photo-gallery .intro{font-size:16px;max-width:500px;margin:0 auto 40px}.photo-gallery .intro p{margin-bottom:0}.photo-gallery .photos{padding-bottom:20px}.photo-gallery .item{padding-bottom:30px}</style>
+</head>
+
+<body>
+    <div class="photo-gallery">
+        <div class="container">
+            <div class="intro">
+                <p class="text-center"><a href="/"><< Voltar</a></p><br>
+                <p class="text-center">Paciente: {{ paciente['nome'] }}</p><br>
+                <p class="text-center">CPF: {{ paciente['cpf'] }}</p><br>
+                <form method="POST" enctype='multipart/form-data' action="/add_img_paciente">
+                    <input type="hidden" name="id_paciente" value="{{ paciente['_id'] }}">
+                    <p class="text-center">imagens: <input type="file" name="imagens" multiple></p><br>
+                    <p class="text-center"><input type="submit" value="Enviar >>"></p>
+                </form>
+                <h2 class="text-center">Imagens:</h2>
+            </div>
+            <div class="row photos">
                 {% for item in paciente['imagens'] %}
-                    <li style="list-style-type: none;">
-                        <figure>
-                            <img width="60%" src="data:image/*;base64, {{ item['b64'] }}" alt="{{ item['nome_imagem'] }}"/>
-                            <figcaption>{{ item['nome_imagem'] }}</figcaption>
-                        </figure>
-                    </li>
+                    <div class="col-sm-6 col-md-4 col-lg-3 item">
+                        <a href="data:image/*;base64, {{ item['b64'] }}" data-lightbox="photos">
+                            <img class="img-fluid" src="data:image/*;base64, {{ item['b64'] }}" alt="{{ item['nome_imagem'] }}"/>
+                        </a>
+                    </div>
                 {% endfor %}
-            </ul>
-        </center>
-    </body>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lightbox.min.js') }}"></script>
+</body>
+
 </html>
